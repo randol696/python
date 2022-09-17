@@ -3,7 +3,6 @@ import sqlite3 as sql
 import datetime
 from datetime import datetime as DateTime, timedelta as TimeDelta
 
-
 root=Tk()
 root.title("Base de Datos ")
 root.geometry("792x500")
@@ -65,8 +64,8 @@ def createTable():
     cursor.execute(
         """CREATE TABLE ventas (
             identificador text,
-            fecha_venta text,
-            fecha_proxima text
+            fecha_venta date,
+            fecha_proxima date
         )"""
     )
     conn.commit()
@@ -97,7 +96,18 @@ def verificar():
     Label(text=fecha_1,font=("Algerian",15)).place(x=160,y=90)
     Label(text=fecha_3,font=("Algerian",15)).place(x=260,y=90)
     
-    Label(text=rest,font=("Algerian",15)).place(x=350,y=90)
+    
+    #fecha_dt=datetime.time(fecha_3, "%Y-%m-%d" )
+    #future_date = datetime(fecha_3)
+    birthdate = datetime.datetime.strptime(fecha_3,'%Y-%m-%d')
+    currentDate = datetime.datetime.today()
+    fecha_total =birthdate - currentDate
+    
+    #gprint(str(TimeDelta(fecha_total)))
+    #fecha_total1=datetime(fecha_total,'%d')
+    #remaining_days = (fecha_dt - today_date).days
+    #print(fecha_dt)
+    Label(text=fecha_total,font=("Algerian",15)).place(x=370,y=90)
     print(datos)
     conn.close()
     
@@ -145,7 +155,7 @@ if __name__ == '__main__':
         
     #createDB()
     #createTable()
-    readRows()
+    #readRows()
 
     
     
